@@ -10,7 +10,7 @@ the [RTI Connext DDS Core Libraries User's Manual](https://community.rti.com/sta
 The file USER_QOS_PROFILES.xml contains the configuration needed for the,
 publisher application, see profile "LBEDiscoveryPluginExamplePublisher_Profile"
 and the subscriber appliation, see profile "LBEDiscoveryPluginExampleSubscriber_Profile".
-By default the configuration allows only the use of the loopback interface (127.0.0.1).
+By default, the configuration allows only the use of the loopback interface (127.0.0.1).
 This is done to prevent resource exhaustion in Connext Micro applications.
 You can update this with the interface name or IP address that you wish to use.
 

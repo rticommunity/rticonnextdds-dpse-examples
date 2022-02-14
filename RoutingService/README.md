@@ -16,7 +16,7 @@ Core libraries and you can find it in folder "connext_core". See the
 documentation in these folders to know how to compile and run the applications.
 
 <b>It is important that you run the publisher application in domain 58 and the
-subscriber application in domain 59.<b> This is because the Routing Service
+subscriber application in domain 59.</b> This is because the Routing Service
 configuration in file USER_ROUTING_SERVICE.xml uses these domain ids. You can
 change this configuration if you prefer to use different domain ids.
 

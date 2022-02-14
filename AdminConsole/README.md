@@ -28,9 +28,9 @@ the correct path to the file EndpointDiscoveryInfo.xml, i.e.:
  </element>
 ```
 
-Once you have done that you can open Admin Console and click on the "Preferences"
-button or select the menu View->Preferences. You will see a pop-up window like the
-following:
+Once you have update that path, you can open Admin Console and click on the "Preferences"
+button or select the menu View->Preferences. You will see the following pop-up
+window:
 
 ![join](img/join_domain.jpg)
 

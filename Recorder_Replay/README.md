@@ -24,7 +24,7 @@ documentation in these folders to know how to compile and run the applications.
 In the RTI Connext Launcher, in the tab with name "Services", click the icon with
 the name "Recording Service" and you will see the following window:
 
-![spy](img/recording.jpg)
+![recorder](img/recorder.jpg)
 
 Before running Recording Service you need to perform the following actions:
 
