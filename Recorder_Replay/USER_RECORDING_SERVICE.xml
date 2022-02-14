@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.1.0/rti_recording_service.xsd">
+
+    <!-- User configuration for Recorder to record a topic published by a Micro application
+         which is using DPSE discovery. -->
+
+    <types>
+        <include file="../HelloWorld.xml"/>
+    </types>
+
+    <recording_service name="recorderDPSE">
+      
+        <!-- Enable remote administration -->
+        <administration>
+            <domain_id>0</domain_id>
+        </administration>
+
+        <!-- enable monitoring -->
+        <monitoring>
+            <status_publication_period>
+                <sec>1</sec>
+                <nanosec>0</nanosec>
+            </status_publication_period>
+            <!-- Sampling period: 500 ms -->
+            <statistics_sampling_period>
+                <sec>0</sec>
+                <nanosec>500000000</nanosec>
+            </statistics_sampling_period>
+        </monitoring>
+        
+        <!--  Top-level storage settings -->
+        <storage>
+            <sqlite>
+                <storage_format>XCDR_AUTO</storage_format>
+                <!-- This will record data to a directory called 'cdr_recording'
+                     inside the current working directory -->
+                <fileset>
+                    <workspace_dir></workspace_dir>
+                    <execution_dir_expression>cdr_recording</execution_dir_expression>
+                    <filename_expression>rti_recorder_default.db</filename_expression>
+                </fileset>
+            </sqlite>
+        </storage>      
+       
+        <!-- Create a DDS DomainParticipant in domain 58. -->
+        <domain_participant name="domain58">
+            <domain_id>58</domain_id>
+            <participant_qos>
+                <participant_name>
+                    <name>Data Visualization</name>
+                    <role_name>Data Visualization</role_name>
+                </participant_name>
+                <transport_builtin>
+                    <mask>UDPv4</mask>
+                </transport_builtin>
+                <discovery_config>
+                    <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
+                    <participant_liveliness_lease_duration>
+                        <sec>1000</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_lease_duration>
+                    <participant_liveliness_assert_period>
+                        <sec>300</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_assert_period>
+                    <initial_participant_announcements>1</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+                </discovery_config>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.library</name>
+                            <value>rtilbedisc</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.create_function</name>
+                            <value>DDS_LBEDiscoveryPlugin_create</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.config_file</name>
+                            <value>RecorderEndpointDiscoveryInfo.xml</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.load_plugins</name>
+                            <value>dds.discovery.endpoint.lbediscovery</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
+                            <value>5</value>
+                        </element>
+                    </value>
+                </property>
+            </participant_qos>
+            <register_type name="HelloWorld" type_ref="HelloWorld"/>
+        </domain_participant>
+
+        <session name="RecordExampleHelloWorld">
+            <topic_group name="ExampleHelloWorld" participant_ref="domain58" >
+                <allow_topic_name_filter>Example HelloWorld</allow_topic_name_filter>
+                <allow_type_name_filter>HelloWorld</allow_type_name_filter>
+                <datareader_qos>
+                    <protocol>
+                        <rtps_object_id>200</rtps_object_id>
+                    </protocol>
+                    <reliability>
+                        <kind>RELIABLE_RELIABILITY_QOS</kind>
+                    </reliability>
+                </datareader_qos>
+            </topic_group>
+        </session>
+    </recording_service>
+    
+</dds>

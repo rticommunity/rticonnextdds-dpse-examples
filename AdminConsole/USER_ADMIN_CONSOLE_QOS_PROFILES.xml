@@ -1,0 +1,681 @@
+<?xml version="1.0"?>
+<!--
+ $Id$
+ (c) Copyright, Real-Time Innovations, 2012-2016.
+ All rights reserved.
+ No duplications, whole or partial, manual or electronic, may be made
+ without express written permission.  Any such copies, or
+ revisions thereof, must display this notice unaltered.
+ This code contains trade secrets of Real-Time Innovations, Inc.
+ 
+ modification history:
+ - - - - - - - - - - -
+-->
+<dds version="6.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.1.0/rti_dds_qos_profiles.xsd">
+    
+    <qos_library name="DemoLibrary">
+        <qos_profile name="BaseProfile">
+            <datareader_qos name="BaseDataReader">
+                <type_consistency>
+                    <kind>ALLOW_TYPE_COERCION</kind>
+                </type_consistency>
+                <resource_limits>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>1</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos name="BaseDataWriter">
+                <resource_limits>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>1</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+        </qos_profile>
+
+        <qos_profile name="MicroAdministration" base_name="DemoLibrary::BaseProfile">        
+            <publisher_qos>
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </publisher_qos>
+            
+            <subscriber_qos>
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </subscriber_qos>
+            
+            <domain_participant_qos>
+                <transport_builtin>
+                    <mask>UDPv4</mask>
+                    <udpv4>
+                        <allow_interfaces_list>
+                            <element>127.0.0.1</element>
+                        </allow_interfaces_list>
+                    </udpv4>
+                </transport_builtin>
+                <discovery>
+                    <initial_peers>
+                        <element>127.0.0.1</element>
+                        <element>239.255.0.1</element>
+                    </initial_peers>
+                </discovery>
+                <participant_name>
+                    <name>Micro Administration</name>
+                    <role_name>Micro Administration</role_name>
+                </participant_name>
+                
+                <discovery_config>
+                    <ignore_default_domain_announcements>false</ignore_default_domain_announcements>
+                    
+                    <participant_liveliness_assert_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </participant_liveliness_assert_period>
+                    <participant_liveliness_lease_duration>
+                        <sec>10</sec>
+                        <nanosec>0</nanosec>
+                    </participant_liveliness_lease_duration>
+                    
+                    <!-- quickly detect the loss of liveness of remote participants -->
+                    <max_liveliness_loss_detection_period>
+                        <sec>5</sec>
+                        <nanosec>0</nanosec>
+                    </max_liveliness_loss_detection_period>
+                    
+                    <asynchronous_publisher>
+                        <disable_asynchronous_write>false</disable_asynchronous_write>
+                    </asynchronous_publisher>
+                    
+                    <publication_writer_publish_mode>
+                        <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+                    </publication_writer_publish_mode>
+                    
+                    <subscription_writer_publish_mode>
+                        <kind>ASYNCHRONOUS_PUBLISH_MODE_QOS</kind>
+                    </subscription_writer_publish_mode>
+                    
+                    <endpoint_type_object_lb_serialization_threshold>-1</endpoint_type_object_lb_serialization_threshold>
+
+                    <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
+                    <!--builtin_discovery_plugins>SEDP</builtin_discovery_plugins-->
+                    <initial_participant_announcements>5</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+
+                </discovery_config>
+                
+                <!-- Allow for quicker shutdown times for each participant. -->
+                <database>
+                    <cleanup_period>
+                        <sec>0</sec>
+                        <nanosec>10000000</nanosec>
+                    </cleanup_period>
+                </database>
+                
+                <resource_limits>
+                    <deserialized_type_object_dynamic_allocation_threshold>1024</deserialized_type_object_dynamic_allocation_threshold>
+                    <type_object_max_deserialized_length>LENGTH_UNLIMITED</type_object_max_deserialized_length>
+                    <type_object_max_serialized_length>65535</type_object_max_serialized_length>
+                    <type_code_max_serialized_length>8192</type_code_max_serialized_length>
+                    <participant_property_list_max_length>1024</participant_property_list_max_length>
+                    <participant_property_string_max_length>32768</participant_property_string_max_length>
+                    <contentfilter_property_max_length>2048</contentfilter_property_max_length>
+                    <writer_data_tag_list_max_length>256</writer_data_tag_list_max_length>
+                    <writer_data_tag_string_max_length>4096</writer_data_tag_string_max_length>
+                    <reader_data_tag_list_max_length>256</reader_data_tag_list_max_length>
+                    <reader_data_tag_string_max_length>4096</reader_data_tag_string_max_length>
+                </resource_limits>
+                
+                <property>
+                    <value>
+                        <!-- Increase the receive socket buffer size to improve
+                             performance. -->
+                        <element>
+                            <name>dds.transport.UDPv4.builtin.recv_socket_buffer_size</name>
+                            <value>2097152</value>
+                        </element>
+                        <!-- Increase the shared memory receive buffer size to 
+                             improve performance. -->
+                        <element>
+                            <name>dds.transport.shmem.builtin.receive_buffer_size</name>
+                            <value>2097152</value>
+                        </element>
+                        <!-- Increase the shared memory message count maximum 
+                             size to improve performance. -->
+                        <element>
+                            <name>dds.transport.shmem.builtin.received_message_count_max</name>
+                            <value>65536</value>
+                        </element>
+                        <element>
+                          <name>  dds.discovery.endpoint.load_plugins </name>
+                          <value> dds.discovery.endpoint.lbediscovery </value>
+                        </element>
+                        <element>
+                          <name>  dds.discovery.endpoint.lbediscovery.library </name>
+                          <value> rtilbedisc                                  </value>
+                        </element>
+                        <element>
+                          <name>  dds.discovery.endpoint.lbediscovery.create_function </name>
+                          <value> DDS_LBEDiscoveryPlugin_create                       </value>
+                        </element>
+                        <element>
+                          <name>  dds.discovery.endpoint.lbediscovery.config_file </name>
+                          <value>C:\shared\github_repos\micro_dpse_vs_core_tools\AdminConsole\EndpointDiscoveryInfo.xml</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
+                            <value>5</value>
+                        </element>
+                    </value>
+                </property>
+            </domain_participant_qos>
+            
+            <!-- Distributed Logger -->
+            <datareader_qos  
+                    topic_filter="rti/distlog">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>8192</depth>
+                </history>
+                
+                <protocol>
+                    <rtps_reliable_reader>
+                        <heartbeat_suppression_duration>
+                            <sec>0</sec>
+                            <nanosec>0</nanosec>
+                        </heartbeat_suppression_duration>
+                        
+                        <max_heartbeat_response_delay>
+                            <sec>0</sec>
+                            <nanosec>0</nanosec>
+                        </max_heartbeat_response_delay>
+                        
+                        <min_heartbeat_response_delay>
+                            <sec>0</sec>
+                            <nanosec>0</nanosec>
+                        </min_heartbeat_response_delay>
+                    </rtps_reliable_reader>
+                </protocol>
+                
+                <resource_limits>
+                    <max_samples_per_instance>8192</max_samples_per_instance>
+                    <max_samples>8192</max_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datareader_qos  
+                    topic_filter="rti/distlog/administration/state">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>1</depth>
+                </history>
+            </datareader_qos>
+
+            <datawriter_qos 
+                    topic_filter="rti/distlog/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>10</depth>
+                </history>
+            </datawriter_qos>
+
+            <datareader_qos  
+                    topic_filter="rti/distlog/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>1</depth>
+                </history>
+            </datareader_qos>
+            
+            <!-- Security Logger -->
+            <datareader_qos  
+                    topic_filter="DDS:Security:LogTopic">
+                    
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+
+                <history>
+                    <kind>KEEP_ALL_HISTORY_QOS</kind>
+                </history>
+                
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                
+                <resource_limits>
+                    <initial_instances>1</initial_instances>
+                    <max_instances>1</max_instances>
+                    <max_samples>8192</max_samples>
+                    <max_samples_per_instance>8192</max_samples_per_instance>
+                </resource_limits>
+                
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.fast_pool.pool_buffer_max_size</name>
+                            <value>4096</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.min_size</name>
+                            <value>4096</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.trim_to_size</name>
+                            <value>1</value>
+                        </element>
+                    </value>
+               </property>
+            </datareader_qos>
+            
+            <!-- Persistence Service -->
+            <datareader_qos  
+                    topic_filter="rti/persistence_service/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+            </datareader_qos>
+            
+            <datawriter_qos 
+                    topic_filter="rti/persistence_service/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+            </datawriter_qos>
+            
+            <!-- Recorder Service -->
+            <datareader_qos 
+                    topic_filter="com_rti_tools_recorder_status">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos 
+                    topic_filter="com_rti_tools_remotectx">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+            
+            <!-- Replay Service -->
+            <datareader_qos 
+                    topic_filter="rti/replay/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos 
+                    topic_filter="rti/replay/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+            
+            <!-- Routing Service -->
+            <datareader_qos 
+                    topic_filter="rti/routing_service/monitoring/*_data">
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_reader.state.filter_redundant_samples</name>
+                            <value>0</value>
+                        </element>
+                    </value>
+                </property>
+            </datareader_qos>
+            
+            <datareader_qos 
+                    topic_filter="rti/routing_service/administration/command_response">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datareader_qos>
+            
+            <datawriter_qos 
+                    topic_filter="rti/routing_service/administration/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+            </datawriter_qos>
+            
+            <!-- Service Admin (Recorder Gen4 and Routing Gen3) -->
+            <datareader_qos 
+                    topic_filter="rti/service/admin/command_reply">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <representation>
+                	<value>
+                		<element>XCDR2_DATA_REPRESENTATION</element>
+                	</value>
+                </representation>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+                <reader_resource_limits>
+                    <dynamically_allocate_fragmented_samples>true</dynamically_allocate_fragmented_samples>
+                </reader_resource_limits>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.fast_pool.pool_buffer_max_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.min_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.trim_to_size</name>
+                            <value>1</value>
+                        </element>
+                    </value>
+                </property>
+            </datareader_qos>
+            
+            <datawriter_qos 
+                    topic_filter="rti/service/admin/command_request">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <resource_limits>
+                    <max_samples>64</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+                <representation>
+                	<value>
+                		<element>XCDR2_DATA_REPRESENTATION</element>
+                	</value>
+                </representation>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_writer.history.memory_manager.fast_pool.pool_buffer_max_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_writer.history.memory_manager.java_stream.min_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_writer.history.memory_manager.java_stream.trim_to_size</name>
+                            <value>1</value>
+                        </element>
+                    </value>
+                </property>
+            </datawriter_qos>
+        
+            <datareader_qos 
+                topic_filter="rti/recording_service/monitoring/*">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <resource_limits>
+                    <max_samples>1024</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+                <reader_resource_limits>
+                    <dynamically_allocate_fragmented_samples>true</dynamically_allocate_fragmented_samples>
+                </reader_resource_limits>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.fast_pool.pool_buffer_max_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.min_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.trim_to_size</name>
+                            <value>1</value>
+                        </element>
+                    </value>
+                </property>
+            </datareader_qos>
+        
+            <datareader_qos 
+                            name="ServiceAdminMonitoring"
+                            topic_filter="rti/service/monitoring*">
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+                <durability>
+                    <kind>TRANSIENT_LOCAL_DURABILITY_QOS</kind>
+                </durability>
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>64</depth>
+                </history>
+                <representation>
+                	<value>
+                		<element>XCDR2_DATA_REPRESENTATION</element>
+                	</value>
+                </representation>
+                <resource_limits>
+                    <max_samples>1024</max_samples>
+                    <max_samples_per_instance>64</max_samples_per_instance>
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>64</initial_samples>
+                </resource_limits>
+                <reader_resource_limits>
+                    <dynamically_allocate_fragmented_samples>true</dynamically_allocate_fragmented_samples>
+                </reader_resource_limits>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.fast_pool.pool_buffer_max_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.min_size</name>
+                            <value>8192</value>
+                        </element>
+                        <element>
+                            <name>dds.data_reader.history.memory_manager.java_stream.trim_to_size</name>
+                            <value>1</value>
+                        </element>
+                    </value>
+                </property>
+            </datareader_qos>      
+        </qos_profile>
+        
+        <qos_profile name="MicroDataVisualization" base_name="DemoLibrary::BaseProfile">
+            <participant_qos base_name="DemoLibrary::MicroAdministration">
+                <participant_name>
+                    <name>Data Visualization</name>
+                    <role_name>Data Visualization</role_name>
+                </participant_name>
+                <discovery_config>
+                    <ignore_default_domain_announcements>true</ignore_default_domain_announcements>
+                </discovery_config>
+            </participant_qos>
+            
+            <subscriber_qos>
+                <!-- Match all partitions. -->
+                <partition>
+                    <name>
+                        <element></element>
+                        <element>*</element>
+                    </name>
+                </partition>
+            </subscriber_qos>
+            
+            <datareader_qos base_name="BuiltinQosLibExp::Generic.AutoTuning">
+                <reliability>
+                    <kind>BEST_EFFORT_RELIABILITY_QOS</kind>
+                </reliability>
+                
+                <history>
+                    <kind>KEEP_LAST_HISTORY_QOS</kind>
+                    <depth>4096</depth>
+                </history>
+                
+                <resource_limits>
+                    <!-- Keep resource consumption as low as possible, good for
+                         use cases with large sample sizes. -->
+                    <initial_instances>1</initial_instances>
+                    <initial_samples>1</initial_samples>
+                    
+                    <!-- Using a large max samples here prevents loss of data
+                         when receiving very small sample sizes through batching
+                    -->
+                    <max_samples>4096</max_samples>
+                </resource_limits>
+                
+                <!--  Use both XCDR and XCDR2 for data representation to ensure that data
+                is correctly displayed when subscribing -->
+                <representation>
+                	<value>
+                		<element>XCDR_DATA_REPRESENTATION</element>
+                		<element>XCDR2_DATA_REPRESENTATION</element>
+                	</value>
+                </representation>
+                
+                <reader_resource_limits>
+                    <!-- Ensure that this QoS is as large as max_samples-->
+                    <max_samples_per_read>4096</max_samples_per_read>
+                </reader_resource_limits>
+				
+                <protocol>
+                    <rtps_object_id>200</rtps_object_id>
+                </protocol>
+                <liveliness>
+                  <kind>AUTOMATIC_LIVELINESS_QOS</kind>
+                    <lease_duration>
+                        <sec>DURATION_INFINITE_SEC</sec>
+                        <nanosec>DURATION_INFINITE_NSEC</nanosec>
+                     </lease_duration>
+                </liveliness>				
+            </datareader_qos>
+        </qos_profile>
+        
+    </qos_library>
+    
+</dds>

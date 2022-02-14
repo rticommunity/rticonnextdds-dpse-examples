@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<!-- 
+Description
+XML QoS Profile for HelloWorld
+
+(c) Copyright, Real-Time Innovations, 2012.  All rights reserved.
+RTI grants Licensee a license to use, modify, compile, and create derivative
+works of the software solely for use with RTI Connext DDS. Licensee may
+redistribute copies of the software provided that all such copies are
+subject to this license. The software is provided "as is", with no warranty
+of any type, including any warranty for fitness for any purpose. RTI is
+under no obligation to maintain or support the software. RTI shall not be
+liable for any incidental or consequential damages arising out of the use
+or inability to use the software.
+
+The QoS configuration of the DDS entities in the generated example is loaded 
+from this file.
+
+This file is used only when it is in the current working directory or when the
+environment variable NDDS_QOS_PROFILES is defined and points to this file.
+
+The profile in this file inherits from the builtin QoS profile 
+BuiltinQosLib::Generic.StrictReliable. That profile, along with all of the 
+other built-in QoS profiles can be found in the 
+BuiltinProfiles.documentationONLY.xml file located in the 
+$NDDSHOME/resource/xml/ directory.
+
+You may use any of these QoS configurations in your application simply by 
+referring to them by the name shown in the 
+BuiltinProfiles.documentationONLY.xml file.
+
+Also, following the QoS Profile composition pattern you can use QoS Snippets
+to easily create your final QoS Profile. For further information visit:
+https://community.rti.com/best-practices/qos-profile-inheritance-and-composition-guidance
+
+There is a QoS Snippet library that contains a collection of
+QoS Snippets that set some specific features or configurations. You can find
+them in the BuiltinProfiles.documentationONLY.xml file as well.
+
+You should not edit the file BuiltinProfiles.documentationONLY.xml directly.
+However, if you wish to modify any of the values in a built-in profile, the
+recommendation is to create a profile of your own and inherit from the built-in
+profile you wish to modify. The NDDS_QOS_PROFILES.example.xml file (contained in 
+the same directory as the BuiltinProfiles.documentationONLY.xml file) shows how
+to inherit from the built-in profiles. 
+
+For more information about XML QoS Profiles see the "Configuring QoS with
+XML" chapter in the RTI Connext DDS Core Libraries User's Manual.
+-->
+
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="file:///C:/Program%20Files/rti_connext_dds-6.1.0/bin/../resource/schema/rti_dds_qos_profiles.xsd">
+    <!-- QoS Library containing the QoS profile used in the generated example.
+
+        A QoS library is a named set of QoS profiles.
+    -->
+    <qos_library name="LBEDiscoveryPluginExample_Library">
+
+        <!-- QoS profile used to configure reliable communication between the DataWriter 
+             and DataReader created in the example code.
+
+             A QoS profile groups a set of related QoS.
+        -->
+        <qos_profile name="LBEDiscoveryPluginExample_Profile" base_name="BuiltinQosLib::Generic.StrictReliable" is_default_qos="true">
+            <domain_participant_qos>
+                <transport_builtin>
+                    <!-- Enable only UDPv4 and locahost so this works with Micro in a PC with many interfaces -->
+                    <mask>UDPv4</mask>
+                    <udpv4>
+                        <allow_interfaces_list>
+                            <element>127.0.0.1</element>
+                        </allow_interfaces_list>
+                    </udpv4>
+                </transport_builtin>
+            </domain_participant_qos>
+        </qos_profile>
+
+        <qos_profile name="LBEDiscoveryPluginExamplePublisher_Profile" base_name="LBEDiscoveryPluginExample_Profile">
+            <domain_participant_qos>
+                <participant_name>
+                    <name>publisher</name>
+                </participant_name>
+                <discovery_config>
+                    <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
+                    <participant_liveliness_lease_duration>
+                        <sec>1000</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_lease_duration>
+                    <participant_liveliness_assert_period>
+                        <sec>300</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_assert_period>
+                    <initial_participant_announcements>1</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+                </discovery_config>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.library</name>
+                            <value>rtilbedisc</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.create_function</name>
+                            <value>DDS_LBEDiscoveryPlugin_create</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.config_file</name>
+                            <value>LBEDiscoveryPluginExampleSubscriber.xml</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.load_plugins</name>
+                            <value>dds.discovery.endpoint.lbediscovery</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
+                            <value>5</value>
+                        </element>
+                    </value>
+                </property>
+            </domain_participant_qos>
+            <datawriter_qos>
+                <protocol>
+                    <rtps_object_id>100</rtps_object_id>
+                </protocol>
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+            </datawriter_qos>
+        </qos_profile>
+
+        <qos_profile name="LBEDiscoveryPluginExampleSubscriber_Profile" base_name="LBEDiscoveryPluginExample_Profile">
+            <domain_participant_qos>
+                <participant_name>
+                    <name>Data Visualization</name>
+                </participant_name>
+                <discovery_config>
+                    <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
+                    <participant_liveliness_lease_duration>
+                        <sec>1000</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_lease_duration>
+                    <participant_liveliness_assert_period>
+                        <sec>300</sec>
+                        <nanosec>DURATION_ZERO_NSEC</nanosec>
+                    </participant_liveliness_assert_period>
+                    <initial_participant_announcements>1</initial_participant_announcements>
+                    <min_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </min_initial_participant_announcement_period>
+                    <max_initial_participant_announcement_period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </max_initial_participant_announcement_period>
+                </discovery_config>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.library</name>
+                            <value>rtilbedisc</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.create_function</name>
+                            <value>DDS_LBEDiscoveryPlugin_create</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.config_file</name>
+                            <value>LBEDiscoveryPluginExamplePublisher.xml</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.load_plugins</name>
+                            <value>dds.discovery.endpoint.lbediscovery</value>
+                        </element>
+                        <element>
+                            <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
+                            <value>5</value>
+                        </element>
+                    </value>
+                </property>
+            </domain_participant_qos>
+            <datareader_qos>
+                <protocol>
+                    <rtps_object_id>200</rtps_object_id>
+                </protocol>
+                <reliability>
+                    <kind>RELIABLE_RELIABILITY_QOS</kind>
+                </reliability>
+            </datareader_qos>
+        </qos_profile>
+
+    </qos_library>
+</dds>
