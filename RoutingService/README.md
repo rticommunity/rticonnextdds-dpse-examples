@@ -25,7 +25,7 @@ change this configuration if you prefer to use different domain ids.
 In the RTI Connext Launcher, in the tab with name "Services", click the icon with
 the name "Routing Service" and you will see the following window:
 
-![spy](img/routing.jpg)
+![routing](img/routing.jpg)
 
 Before running Routing Service you need to perform the following actions:
 
