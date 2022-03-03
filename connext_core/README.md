@@ -27,8 +27,10 @@ rtiddsgen -create typeFiles -create makefiles -platform <architecture> -language
 ```
 
 Your <architecture> is the combination of a processor, OS, and compiler version
-that you will use to build your application. For example, when compiling with a x64 processor, 64-bit Windows, and Visual Studio 2015, your architecture is x64Win64VS2015. This should match one of the target
-architectures that you have installed.
+that you will use to build your application. For example, when compiling with a 
+x64 processor, 64-bit Windows, and Visual Studio 2015, your architecture is 
+x64Win64VS2015. This should match one of the target architectures that you have 
+installed.
 
 Depending on the architecture, rtiddsgen generates a makefile, Visual Studio
 solution file, etc. You can use this to compile the publisher and subscriber
