@@ -5,7 +5,7 @@ RTI Connext DDS Core Libraries to use the Limited Bandwidth Endpoint Discovery
 Plugin.
 
 For more information about the RTI Connext DDS Core Libraries, please refer to
-the [RTI Connext DDS Core Libraries User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/connext_dds_professional/users_manual/index.htm).
+the [RTI Connext DDS Core Libraries User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/users_manual/index.htm).
 
 The file USER_QOS_PROFILES.xml contains the configuration needed for the
 publisher application (see profile "LBEDiscoveryPluginExamplePublisher_Profile")
@@ -54,7 +54,7 @@ As an example, you can run the publisher application with the following commands
 ```console
 cd <this git repository>/connext_core
 
-objs\x64Win64VS2015\HelloWorld_publisher.exe -domain 58
+objs\x64Win64VS2015\HelloWorld_publisher.exe --domain 58
 ```
 
 and the subscriber application with the following commands:
@@ -62,5 +62,5 @@ and the subscriber application with the following commands:
 ```console
 cd <this git repository>/connext_core
 
-objs\x64Win64VS2015\HelloWorld_subscriber.exe -domain 58
+objs\x64Win64VS2015\HelloWorld_subscriber.exe --domain 58
 ```

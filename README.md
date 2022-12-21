@@ -11,8 +11,8 @@ For more information about DPSE discovery, please refer to the
 [RTI Connext Micro User's Manual](https://community.rti.com/static/documentation/connext-micro/2.4.14/doc/html/usersmanual/discovery.html#static-discovery-plugin).
 
 For more information about the Limited Bandwidth Endpoint Discovery Plugin,
-please refer to the [RTI Limited Bandwidth Plugins User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/addon_products/limited_bandwidth_plugins/users_manual/index.htm)
-and the [RTI Limited Bandwidth Plugins Installation Guide](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/addon_products/limited_bandwidth_plugins/installation_guide/index.htm).
+please refer to the [RTI Limited Bandwidth Plugins User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/addon_products/limited_bandwidth_plugins/users_manual/index.htm)
+and the [RTI Limited Bandwidth Plugins Installation Guide](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/addon_products/limited_bandwidth_plugins/installation_guide/index.htm).
 
 All the examples use the type in the file HelloWorld.xml in this folder.
 
@@ -28,18 +28,19 @@ The examples contained in the
 [master](https://github.com/rticommunity/rticonnextdds-examples/tree/master) and
 [develop](https://github.com/rticommunity/rticonnextdds-examples/tree/develop)
 branches of this repository have been built and tested against RTI Connext DDS
-6.1.0 and RTI Connext Micro 2.4.14. If you need examples that have been built
-and tested against older versions of RTI Connext DDS, please check the
-following knowledge base:
+6.1.2 and RTI Connext Micro 2.4.14. If you need examples that have been built
+and tested against older versions of RTI Connext DDS, please check out the
+appropriate branch or knowledge base:
 
+- [release/6.1.0](https://github.com/rticommunity/rticonnextdds-dpse-examples/tree/release/6.1.0)
 - [release/5.2.0](https://community.rti.com/kb/interoperability-connext-dds-micro-dpse-connext-dds-professional)
 
 ## Prerequisites
 
 Before running these examples you need to install:
 
-- RTI Connext Professional 6.1.0
-- Limited Bandwidth Endpoint Discovery Plugin for Connext 6.1.0
+- RTI Connext Professional 6.1.2
+- Limited Bandwidth Endpoint Discovery Plugin for Connext 6.1.2
 - RTI Connext Micro 2.4.14
 
 ## About the examples

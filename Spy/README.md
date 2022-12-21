@@ -8,7 +8,7 @@ Plugin and subscribe to data sent by either of the following:
  - a Connext Core application configured with the Limited Bandwidth
    Endpoint Discovery Plugin.
 
-For more information about RTI DDS Spy please refer to the [documentation](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/api/connext_dds/api_cpp/group__DDSNddsspyModule.html).
+For more information about RTI DDS Spy please refer to the [documentation](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp/group__DDSNddsspyModule.html).
 
 The file USER_RTIDDSSPY_QOS_PROFILES.xml contains the configuration needed to run
 RTI DDS Spy; see the profile "DPSE" in that file. By default, it allows only the 

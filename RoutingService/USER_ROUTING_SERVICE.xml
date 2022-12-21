@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- 
- (c) Copyright, Real-Time Innovations, $Date: 2015/05/15 17:06:21 $.
+ (c) Copyright, Real-Time Innovations, 2015-2022.
  All rights reserved.
  No duplications, whole or partial, manual or electronic, may be made
  without express written permission.  Any such copies, or
@@ -9,7 +9,7 @@
 -->
 
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.1.0/rti_routing_service.xsd">
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.1.2/rti_routing_service.xsd">
 
     <types>
         <include file="../HelloWorld.xml"/>
@@ -101,7 +101,7 @@
                             </element>
                             <element>
                                 <name>  dds.discovery.endpoint.lbediscovery.config_file </name>
-                                <value>RoutingEndpointDiscoveryInfo_publisher.xml</value>
+                                <value> RoutingEndpointDiscoveryInfo_publisher.xml</value>
                             </element>
                             <element>
                                 <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
@@ -164,11 +164,11 @@
                             </element>
                             <element>
                                 <name>  dds.discovery.endpoint.lbediscovery.config_file </name>
-                                <value>RoutingEndpointDiscoveryInfo_subscriber.xml</value>
+                                <value> RoutingEndpointDiscoveryInfo_subscriber.xml     </value>
                             </element>
                             <element>
-                                <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
-                                <value>5</value>
+                                <name>  dds.discovery.endpoint.lbediscovery.verbosity</name>
+                                <value> 5</value>
                             </element>
                         </value>
                     </property>

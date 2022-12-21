@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- 
- (c) Copyright, Real-Time Innovations, 2015-2016.
+ (c) Copyright, Real-Time Innovations, 2015-2022.
  All rights reserved.
  No duplications, whole or partial, manual or electronic, may be made
  without express written permission.  Any such copies, or
@@ -9,7 +9,7 @@
 -->
 
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.1.0/rti_dds_qos_profiles.xsd">
+     xsi:noNamespaceSchemaLocation="https://community.rti.com/schema/6.1.2/rti_dds_qos_profiles.xsd">
 
     <!-- Qos Library -->
     <qos_library name="RtiddsspyDPSE">

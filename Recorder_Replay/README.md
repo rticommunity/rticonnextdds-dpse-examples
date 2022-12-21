@@ -9,9 +9,9 @@ of the following:
  - a Connext Core application configured with the Limited Bandwidth Endpoint
    Discovery Plugin.
 
-For more information about Recording Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/connext_dds_professional/services/recording_service/recorder/record_index.html).
+For more information about Recording Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/services/recording_service/recorder/record_index.html).
 
-For more information about Replay Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/connext_dds_professional/services/recording_service/replay/replay_index.html).
+For more information about Replay Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/services/recording_service/replay/replay_index.html).
 
 ## Run the Publisher Application and Subscriber Applications
 
