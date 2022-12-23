@@ -1,4 +1,4 @@
-# Connext DDS Core Libraries
+# Connext DDS Micro Libraries
 
 In this directory you will find an example that illustrates how to configure 
 RTI Connext DDS Micro to use the DPSE discovery plugin.
