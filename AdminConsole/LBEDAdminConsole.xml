@@ -13,25 +13,8 @@
 
     <qos_library name="LBEDiscoveryPluginExample_Library">
 
-        <qos_profile name="LBEDiscoveryPluginExample_Profile" base_name="BuiltinQosLib::Generic.StrictReliable" is_default_qos="true">
-            <domain_participant_qos>
-                <transport_builtin>
-                    <!-- Enable only UDPv4 and locahost so this works with Micro in a PC with many interfaces -->
-                    <mask>UDPv4</mask>
-                    <udpv4>
-                        <allow_interfaces_list>
-                            <element>127.0.0.1</element>
-                        </allow_interfaces_list>
-                    </udpv4>
-                </transport_builtin>
-                <discovery_config>
-                    <builtin_discovery_plugins>DPSE</builtin_discovery_plugins>
-                </discovery_config>
-            </domain_participant_qos>
-        </qos_profile>
-
         <!-- The QoS profile used by the publishing entities -->
-        <qos_profile name="LBEDiscoveryPluginExamplePublisher_Profile" base_name="LBEDiscoveryPluginExample_Profile">
+        <qos_profile name="LBEDiscoveryPluginExamplePublisher_Profile" base_name="BuiltinQosLib::Generic.StrictReliable">
             <domain_participant_qos>
                 <participant_name>
                     <name>publisher</name>
@@ -48,7 +31,7 @@
         </qos_profile>
 
         <!-- The QoS profile used by the subscribing entities -->
-        <qos_profile name="LBEDiscoveryPluginExampleSubscriber_Profile" base_name="LBEDiscoveryPluginExample_Profile">
+        <qos_profile name="LBEDiscoveryPluginExampleSubscriber_Profile" base_name="BuiltinQosLib::Generic.StrictReliable">
             <domain_participant_qos>
                 <participant_name>
                     <name>Data Visualization</name>
@@ -79,6 +62,10 @@
     </domain_library>
 
     <domain_participant_library name="ExampleLBED_DomainParticipant_Library">
+        <domain_participant name="Micro Administration"
+                domain_ref="LBEDiscoveryPluginExample_Domain_Library::LBEDiscoveryPluginExample_Domain">
+        </domain_participant>
+
         <domain_participant name="publisher"
                 domain_ref="LBEDiscoveryPluginExample_Domain_Library::LBEDiscoveryPluginExample_Domain">
             <publisher name="Pub">

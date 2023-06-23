@@ -6,12 +6,12 @@ Discovery Plugin. This example routes the Topic "Example HelloWorld"
 from domain 58 to domain 59 when both the publisher and the subscriber 
 applications are configured to use DPSE discovery.
 
-For more information about Routing Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/services/routing_service/index.html).
+For more information about Routing Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/7.1.0/doc/manuals/connext_dds_professional/services/routing_service/index.html).
 
 ## Run the Publisher and Subscriber Applications
 
 You can use the publisher and subscriber based on RTI Connext Micro found
-in the folder "connext_micro" or the publisher based on RTI Connext
+in the folder "connext_micro" or the publisher and subscriber based on RTI Connext
 Core libraries found in the folder "connext_core". See the 
 documentation in these folders for information on how to compile and run 
 the applications.
