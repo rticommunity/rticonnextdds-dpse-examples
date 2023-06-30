@@ -14,7 +14,7 @@
     <!-- Qos Library -->
     <qos_library name="LBEDiscoveryPluginExample_Library">
 
-        <qos_profile name="LBEDiscoveryPluginExample_Profile" base_name="BuiltinQosLib::Generic.StrictReliable" is_default_qos="true">
+        <qos_profile name="LBEDiscoveryPluginExample_Profile">
             <domain_participant_qos>
                 <transport_builtin>
                     <!-- Enable only UDPv4 and locahost so this works with Micro in a PC with many interfaces -->
@@ -53,10 +53,6 @@
                 <reliability>
                     <kind>RELIABLE_RELIABILITY_QOS</kind>
                 </reliability>
-                <resource_limits>
-                    <max_samples_per_instance>10000</max_samples_per_instance>
-                    <max_samples>10000</max_samples>
-                </resource_limits>
             </datareader_qos>
         </qos_profile>
     </qos_library>
