@@ -273,6 +273,16 @@ Application_create(
         goto done;
     }
 
+    /* This is only needed for interoperability with Admin Console */
+    retcode = DPSE_RemoteParticipant_assert(
+        application->participant,
+        "Micro Administration");
+    if (retcode != DDS_RETCODE_OK)
+    {
+        printf("failed to assert remote participant\n");
+        goto done;
+    }
+
     success = DDS_BOOLEAN_TRUE;
 
     done:

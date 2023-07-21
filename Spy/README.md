@@ -8,7 +8,7 @@ Plugin and subscribe to data sent by either of the following:
  - a Connext Core application configured with the Limited Bandwidth
    Endpoint Discovery Plugin.
 
-For more information about RTI DDS Spy please refer to the [documentation](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/api/connext_dds/api_cpp/group__DDSNddsspyModule.html).
+For more information about RTI DDS Spy please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/7.1.0/doc/manuals/connext_dds_professional/tools/rti_dds_spy/index.html).
 
 The file USER_RTIDDSSPY_QOS_PROFILES.xml contains the configuration needed to run
 RTI DDS Spy; see the profile "DPSE" in that file. By default, it allows only the 
@@ -29,12 +29,12 @@ in these folders for information on how to compile and run the applications.
 
 Before starting Spy, you will need to update the path to the file with
 Endpoint configuration. Open file USER_RTIDDSSPY_QOS_PROFILES.xml and set
-the correct path to the file SpyEndpointDiscoveryInfo.xml, such as:
+the correct path to the file LBEDSpy.xml, such as:
 
 ```xml
 <element>
-    <name>  dds.discovery.endpoint.lbediscovery.config_file </name>
-    <value>C:\shared\github_repos\micro_dpse_vs_core_tools\Spy\SpyEndpointDiscoveryInfo.xml</value>
+    <name>dds.discovery.endpoint.lbediscovery.config_file</name>
+    <value>C:\shared\github_repos\micro_dpse_vs_core_tools\Spy\LBEDSpy.xml</value>
  </element>
 ```
 

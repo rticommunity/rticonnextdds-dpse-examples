@@ -9,14 +9,10 @@
 -->
 
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.1.2/rti_replay_service.xsd">
+     xsi:noNamespaceSchemaLocation="https://community.rti.com/schema/7.1.0/rti_replay_service.xsd">
 
     <!-- User configuration for Recorder to record a topic published by a Micro application
          which is using DPSE discovery. -->
-
-    <types>
-        <include file="../HelloWorld.xml"/>
-    </types>
 
     <replay_service name="replayDPSE">
         
@@ -48,75 +44,17 @@
         </playback-->
 
         <!-- Create a DDS DomainParticipant in domain 58. -->
-        <domain_participant name="domain58">
+        <domain_participant name="publisher">
             <domain_id>58</domain_id>
-            <participant_qos>
-                <participant_name>
-                    <name>publisher</name>
-                    <role_name>publisher</role_name>
-                </participant_name>
-                <transport_builtin>
-                    <mask>UDPv4</mask>
-                </transport_builtin>
-                <discovery_config>
-                    <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
-                    <participant_liveliness_lease_duration>
-                        <sec>1000</sec>
-                        <nanosec>DURATION_ZERO_NSEC</nanosec>
-                    </participant_liveliness_lease_duration>
-                    <participant_liveliness_assert_period>
-                        <sec>300</sec>
-                        <nanosec>DURATION_ZERO_NSEC</nanosec>
-                    </participant_liveliness_assert_period>
-                    <initial_participant_announcements>1</initial_participant_announcements>
-                    <min_initial_participant_announcement_period>
-                        <sec>1</sec>
-                        <nanosec>0</nanosec>
-                    </min_initial_participant_announcement_period>
-                    <max_initial_participant_announcement_period>
-                        <sec>1</sec>
-                        <nanosec>0</nanosec>
-                    </max_initial_participant_announcement_period>
-                </discovery_config>
-                <property>
-                    <value>
-                        <element>
-                            <name>dds.discovery.endpoint.lbediscovery.library</name>
-                            <value>rtilbedisc</value>
-                        </element>
-                        <element>
-                            <name>dds.discovery.endpoint.lbediscovery.create_function</name>
-                            <value>DDS_LBEDiscoveryPlugin_create</value>
-                        </element>
-                        <element>
-                            <name>dds.discovery.endpoint.lbediscovery.config_file</name>
-                            <value>ReplayEndpointDiscoveryInfo.xml</value>
-                        </element>
-                        <element>
-                            <name>dds.discovery.endpoint.load_plugins</name>
-                            <value>dds.discovery.endpoint.lbediscovery</value>
-                        </element>
-                        <element>
-                            <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
-                            <value>5</value>
-                        </element>
-                    </value>
-                </property>
-            </participant_qos>
+            <participant_qos base_name="LBEDiscoveryPluginExample_Library::LBEDiscoveryPluginExamplePublisher_Profile"/>
             <register_type name="HelloWorld" type_ref="HelloWorld"/>
         </domain_participant>
 
         <session name="ReplayExampleHelloWorld">
-            <topic_group name="ExampleHelloWorld" participant_ref="domain58" >
+            <topic_group name="ExampleHelloWorld" participant_ref="publisher" >
                 <allow_topic_name_filter>Example HelloWorld</allow_topic_name_filter>
                 <allow_type_name_filter>HelloWorld</allow_type_name_filter>
-                <datawriter_qos>
-                    <protocol>
-                        <rtps_object_id>100</rtps_object_id>
-                    </protocol>
-                    <reliability>
-                        <kind>RELIABLE_RELIABILITY_QOS</kind>
-                    </reliability>
+                <datawriter_qos base_name="LBEDiscoveryPluginExample_Library::LBEDiscoveryPluginExamplePublisher_Profile">
                 </datawriter_qos>
             </topic_group>
         </session>

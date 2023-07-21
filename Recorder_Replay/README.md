@@ -9,14 +9,14 @@ of the following:
  - a Connext Core application configured with the Limited Bandwidth Endpoint
    Discovery Plugin.
 
-For more information about Recording Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/services/recording_service/recorder/record_index.html).
+For more information about Recording Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/7.1.0/doc/manuals/connext_dds_professional/services/recording_service/recorder/record_index.html).
 
-For more information about Replay Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/6.1.2/doc/manuals/connext_dds_professional/services/recording_service/replay/replay_index.html).
+For more information about Replay Service, please refer to the [User's Manual](https://community.rti.com/static/documentation/connext-dds/7.1.0/doc/manuals/connext_dds_professional/services/recording_service/replay/replay_index.html).
 
 ## Run the Publisher Application and Subscriber Applications
 
-You can use the publisher and subscriber based on RTI Connext Micro
-found in the folder "connext_micro" or the publisher based on RTI Connext
+You can use the publisher and subscriber based on RTI Connext Micro found
+in the folder "connext_micro" or the publisher and subscriber based on RTI Connext
 Core libraries found in the folder "connext_core". See the 
 documentation in these folders for information on how to compile and run 
 the applications.

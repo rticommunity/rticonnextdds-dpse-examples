@@ -9,12 +9,8 @@
 -->
 
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.1.2/rti_routing_service.xsd">
-
-    <types>
-        <include file="../HelloWorld.xml"/>
-    </types>
-  
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/7.1.0/rti_routing_service.xsd">
+    
     <routing_service name="DPSE_bridge_domain_58_and_domain_59">
         <annotation>
             <documentation>
@@ -50,166 +46,40 @@
         </monitoring>
 
         <domain_route name="TwoWayDomainRoute">
-            <participant name="1">
+            <participant name="Data Visualization">
                 <domain_id>58</domain_id>
-                <participant_qos>
-                    <participant_name>
-                        <name>Data Visualization</name>
-                        <role_name>Data Visualization</role_name>
-                    </participant_name>
-                    <transport_builtin>
-                        <mask>UDPv4</mask>
-                    </transport_builtin>
-                    <discovery>
-                        <initial_peers>
-                            <element>udpv4://127.0.0.1</element>
-                        </initial_peers>
-                    </discovery>
-                    <discovery_config>
-                        <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
-                        <participant_liveliness_lease_duration>
-                            <sec>10</sec>
-                            <nanosec>DURATION_ZERO_NSEC</nanosec>
-                        </participant_liveliness_lease_duration>
-                        <participant_liveliness_assert_period>
-                            <sec>5</sec>
-                            <nanosec>DURATION_ZERO_NSEC</nanosec>
-                        </participant_liveliness_assert_period>
-                        <initial_participant_announcements>5</initial_participant_announcements>
-                        <min_initial_participant_announcement_period>
-                            <sec>1</sec>
-                            <nanosec>0</nanosec>
-                        </min_initial_participant_announcement_period>
-                        <max_initial_participant_announcement_period>
-                            <sec>1</sec>
-                            <nanosec>0</nanosec>
-                        </max_initial_participant_announcement_period>
-                    </discovery_config>
-                    <property>
-                        <value>
-                            <element>
-                                <name>  dds.discovery.endpoint.load_plugins </name>
-                                <value> dds.discovery.endpoint.lbediscovery </value>
-                            </element>
-                            <element>
-                                <name>  dds.discovery.endpoint.lbediscovery.library </name>
-                                <value> rtilbedisc                                  </value>
-                            </element>
-                            <element>
-                                <name>  dds.discovery.endpoint.lbediscovery.create_function </name>
-                                <value> DDS_LBEDiscoveryPlugin_create                       </value>
-                            </element>
-                            <element>
-                                <name>  dds.discovery.endpoint.lbediscovery.config_file </name>
-                                <value> RoutingEndpointDiscoveryInfo_publisher.xml</value>
-                            </element>
-                            <element>
-                                <name>dds.discovery.endpoint.lbediscovery.verbosity</name>
-                                <value>5</value>
-                            </element>
-                        </value>
-                    </property>
-                </participant_qos>
+                <participant_qos base_name="LBEDiscoveryPluginExample_Library::LBEDiscoveryPluginExampleSubscriber_Profile"/>
                 <registered_type name="HelloWorld" type_name="HelloWorld"/>
+                <!--register_type name="HelloWorld" type_ref="HelloWorld"/-->
             </participant>
 
-            <participant name="2">
+            <participant name="publisher">
                 <domain_id>59</domain_id>
-                <participant_qos>
-                    <participant_name>
-                        <name>publisher</name>
-                        <role_name>publisher</role_name>
-                    </participant_name>
-                    <transport_builtin>
-                        <mask>UDPv4</mask>
-                    </transport_builtin>
-                    <discovery>
-                        <initial_peers>
-                            <element>udpv4://127.0.0.1</element>
-                        </initial_peers>
-                    </discovery>
-                    <discovery_config>
-                        <builtin_discovery_plugins>SPDP</builtin_discovery_plugins>
-                        <participant_liveliness_lease_duration>
-                            <sec>10</sec>
-                            <nanosec>DURATION_ZERO_NSEC</nanosec>
-                        </participant_liveliness_lease_duration>
-                        <participant_liveliness_assert_period>
-                            <sec>5</sec>
-                            <nanosec>DURATION_ZERO_NSEC</nanosec>
-                        </participant_liveliness_assert_period>
-                        <initial_participant_announcements>5</initial_participant_announcements>
-                        <min_initial_participant_announcement_period>
-                            <sec>1</sec>
-                            <nanosec>0</nanosec>
-                        </min_initial_participant_announcement_period>
-                        <max_initial_participant_announcement_period>
-                            <sec>1</sec>
-                            <nanosec>0</nanosec>
-                        </max_initial_participant_announcement_period>
-                    </discovery_config>
-                    <property>
-                        <value>
-                            <element>
-                                <name>  dds.discovery.endpoint.load_plugins </name>
-                                <value> dds.discovery.endpoint.lbediscovery </value>
-                            </element>
-                            <element>
-                                <name>  dds.discovery.endpoint.lbediscovery.library </name>
-                                <value> rtilbedisc                                  </value>
-                            </element>
-                            <element>
-                                <name>  dds.discovery.endpoint.lbediscovery.create_function </name>
-                                <value> DDS_LBEDiscoveryPlugin_create                       </value>
-                            </element>
-                            <element>
-                                <name>  dds.discovery.endpoint.lbediscovery.config_file </name>
-                                <value> RoutingEndpointDiscoveryInfo_subscriber.xml     </value>
-                            </element>
-                            <element>
-                                <name>  dds.discovery.endpoint.lbediscovery.verbosity</name>
-                                <value> 5</value>
-                            </element>
-                        </value>
-                    </property>
-                </participant_qos>
+                <participant_qos base_name="LBEDiscoveryPluginExample_Library::LBEDiscoveryPluginExamplePublisher_Profile"/>
                 <registered_type name="HelloWorld" type_name="HelloWorld"/>
+                <!--register_type name="HelloWorld" type_ref="HelloWorld"/-->
             </participant>
 
             <session name="Session0">
                 <topic_route name="TopicRoute">
                     <publish_with_original_info>true</publish_with_original_info>
                     <publish_with_original_timestamp>true</publish_with_original_timestamp>
-                    <input participant="1">
+                    <input participant="Data Visualization">
                         <registered_type_name>HelloWorld</registered_type_name>
                         <topic_name>Example HelloWorld</topic_name>
                         <creation_mode>IMMEDIATE</creation_mode>
-                        <datareader_qos>
-                            <reliability>
-                                <kind>RELIABLE_RELIABILITY_QOS</kind>
-                            </reliability>
-                            <protocol>
-                                <rtps_object_id>200</rtps_object_id>
-                            </protocol>
-                        </datareader_qos>
+                        <datareader_qos base_name="LBEDiscoveryPluginExample_Library::LBEDiscoveryPluginExampleSubscriber_Profile"/>
                     </input>
-                    <output>
+                    <output participant="publisher">
                         <registered_type_name>HelloWorld</registered_type_name>
                         <topic_name>Example HelloWorld</topic_name>
                         <creation_mode>IMMEDIATE</creation_mode>
-                        <datawriter_qos>
-                            <reliability>
-                                <kind>RELIABLE_RELIABILITY_QOS</kind>
-                            </reliability>                            
-                            <protocol>
-                                <rtps_object_id>100</rtps_object_id>
-                            </protocol>                          
-                        </datawriter_qos>
+                        <datawriter_qos base_name="LBEDiscoveryPluginExample_Library::LBEDiscoveryPluginExamplePublisher_Profile"/>
                     </output>
                 </topic_route>
             </session>
         </domain_route>
     </routing_service>
-
+  
 </dds>
 
