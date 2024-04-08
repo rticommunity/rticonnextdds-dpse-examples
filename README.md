@@ -27,7 +27,7 @@ The examples contained in the
 [master](https://github.com/rticommunity/rticonnextdds-examples/tree/master) and
 [develop](https://github.com/rticommunity/rticonnextdds-examples/tree/develop)
 branches of this repository have been built and tested against RTI Connext DDS
-7.3.0 and RTI Connext Micro 2.4.14.1. If you need examples that have been built
+7.3.0 and RTI Connext Micro 2.4.14.2. If you need examples that have been built
 and tested against older versions of RTI Connext DDS, please check out the
 appropriate branch or knowledge base:
 
@@ -41,7 +41,7 @@ appropriate branch or knowledge base:
 Before running these examples you need to install:
 
 - RTI Connext Professional 7.3.0
-- RTI Connext Micro 2.4.14.1
+- RTI Connext Micro 2.4.14.2
 
 ## About the examples
 

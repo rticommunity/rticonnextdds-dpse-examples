@@ -5,7 +5,7 @@ RTI Connext DDS Micro to use the DPSE discovery plugin.
 
 For more information about RTI Connext DDS Micro, please refer to
 the [RTI Connext DDS Micro User's Manual]
-(https://community.rti.com/static/documentation/connext-micro/2.4.14.1/doc/html/introduction.html).
+(https://community.rti.com/static/documentation/connext-micro/2.4.14.2/doc/html/introduction.html).
 
 ## How to Generate the Example and Compile
 

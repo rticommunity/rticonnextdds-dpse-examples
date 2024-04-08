@@ -695,15 +695,6 @@
                 <discovery_config>
                     <ignore_default_domain_announcements>true</ignore_default_domain_announcements>
                 </discovery_config>
-                <property>
-                    <value>
-                        <element>
-                            <name>dds.xtypes.compliance_mask</name>
-                            <value>1</value>
-                            <propagate>false</propagate>
-                        </element>
-                    </value>
-                </property>
             </participant_qos>
 
             <datawriter_qos name="MicroDataPublishingDW">
