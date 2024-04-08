@@ -12,7 +12,7 @@
  - - - - - - - - - - -
 -->
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/7.1.0/rti_dds_profiles.xsd">
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/7.3.0/rti_dds_profiles.xsd">
     
     <qos_library name="DemoLibrary">
         <qos_profile name="BaseProfile">
@@ -654,7 +654,7 @@
                     <value>
                         <element>
                             <name>dds.discovery.endpoint.lbediscovery.config_file</name>
-                            <value>C:\shared\github_repos\rticonnextdds-dpse-examples\AdminConsole\LBEDAdminConsole.xml</value>
+                            <value>d:\shared\github_repos\rticonnextdds-dpse-examples\AdminConsole\LBEDAdminConsole.xml</value>
                         </element>
                     </value>
                 </property>
@@ -695,6 +695,15 @@
                 <discovery_config>
                     <ignore_default_domain_announcements>true</ignore_default_domain_announcements>
                 </discovery_config>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.xtypes.compliance_mask</name>
+                            <value>1</value>
+                            <propagate>false</propagate>
+                        </element>
+                    </value>
+                </property>
             </participant_qos>
 
             <datawriter_qos name="MicroDataPublishingDW">

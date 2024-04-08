@@ -9,7 +9,7 @@
 -->
 
 <dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/7.1.0/rti_dds_profiles.xsd">
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/7.3.0/rti_dds_profiles.xsd">
 
     <qos_library name="LBEDiscoveryPluginExample_Library">
 
@@ -36,6 +36,15 @@
                 <participant_name>
                     <name>publisher</name>
                 </participant_name>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.xtypes.compliance_mask</name>
+                            <value>1</value>
+                            <propagate>false</propagate>
+                        </element>
+                    </value>
+                </property>
             </domain_participant_qos>
             <datawriter_qos>
                 <protocol>

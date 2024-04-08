@@ -31,7 +31,7 @@ the correct path to the file EndpointDiscoveryInfo.xml, such as:
 ```xml
 <element>
     <name> dds.discovery.endpoint.lbediscovery.config_file </name>
-    <value>C:\shared\github_repos\rticonnextdds-dpse-examples\AdminConsole\LBEDAdminConsole.xml</value>
+    <value>D:\shared\github_repos\rticonnextdds-dpse-examples\AdminConsole\LBEDAdminConsole.xml</value>
  </element>
 ```
 
@@ -97,7 +97,7 @@ select Visualize->Sample Log.
 ## How to Publish to Topic
 
 After you have joined the domain with the profile "DemoLibrary::MicroAdministration"
-you can subscribe to the Topic.
+you can publish to the Topic.
 
 First you need to run the subscriber application. You can use the subscriber based 
 on RTI Connext Micro found in the folder "connext_micro" or the

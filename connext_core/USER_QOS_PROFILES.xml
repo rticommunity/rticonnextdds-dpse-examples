@@ -36,6 +36,15 @@
                 <participant_name>
                     <name>publisher</name>
                 </participant_name>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.xtypes.compliance_mask</name>
+                            <value>1</value>
+                            <propagate>false</propagate>
+                        </element>
+                    </value>
+                </property>
             </domain_participant_qos>
             <datawriter_qos>
                 <protocol>
