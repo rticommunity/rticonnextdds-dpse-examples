@@ -31,6 +31,7 @@ branches of this repository have been built and tested against RTI Connext DDS
 and tested against older versions of RTI Connext DDS, please check out the
 appropriate branch or knowledge base:
 
+- [release/7.3.0](https://github.com/rticommunity/rticonnextdds-dpse-examples/tree/release/7.3.0)
 - [release/7.1.0](https://github.com/rticommunity/rticonnextdds-dpse-examples/tree/release/7.1.0)
 - [release/6.1.2](https://github.com/rticommunity/rticonnextdds-dpse-examples/tree/release/6.1.2)
 - [release/6.1.0](https://github.com/rticommunity/rticonnextdds-dpse-examples/tree/release/6.1.0)
