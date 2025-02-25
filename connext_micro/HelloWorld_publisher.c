@@ -55,7 +55,7 @@ publisher_main_w_args(
     sample = HelloWorldTypeSupport_create_data();
     if (sample == NULL)
     {
-        printf("failed HelloWorldTypeSupport_create_data\n");
+        printf("failed HelloWorldTypeSupport_create_data \n");
         return -1;
     }
 
